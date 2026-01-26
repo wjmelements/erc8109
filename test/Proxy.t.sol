@@ -7,8 +7,6 @@ import { IERC8109Minimal } from "../src/interfaces/IERC8109Minimal.sol";
 
 contract ProxyTest is Test {
 
-    bytes4 private constant SELECTOR = 0x12345678;
-
     address internal proxy;
     address internal bootstrap;
 
@@ -17,16 +15,16 @@ contract ProxyTest is Test {
         bootstrap = vm.computeCreateAddress(proxy, 1);
     }
 
-    function testBootstrapDeployed() public {
+    function testBootstrapDeployed() public view {
         assertEq(bootstrap.code.length, 93);
     }
 
-    function testRevert() public {
-        vm.expectRevert(abi.encodeWithSelector(IERC8109Minimal.FunctionNotFound.selector, SELECTOR));
-        proxy.call(abi.encodeWithSelector(SELECTOR));
+    function testFunctionNotFound() public {
+        vm.expectRevert(abi.encodeWithSelector(IERC8109Minimal.FunctionNotFound.selector, Bootstrap.configure.selector));
+        IERC8109Minimal(proxy).facetAddress(Bootstrap.configure.selector);
     }
 
-    function testBootstrapConfigureRequiresOwner() public {
+    function testBootstrapConfigureUnauthorized() public {
         address unauthorized = makeAddr("thief");
         vm.expectRevert(abi.encodeWithSelector(Bootstrap.Unauthorized.selector, unauthorized));
         vm.prank(unauthorized);
