@@ -18,7 +18,7 @@ contract ProxyTest is Test {
     }
 
     function testBootstrapDeployed() public {
-        assertEq(bootstrap.code.length, 55);
+        assertEq(bootstrap.code.length, 93);
     }
 
     function testRevert() public {
@@ -35,7 +35,11 @@ contract ProxyTest is Test {
 
     function testBootstrapConfigureIntrospect() public {
         address facetAddressImpl = deployCode("out/facetAddress.evm/facetAddress.json");
+
+        vm.expectEmit();
+        emit IERC8109Minimal.SetDiamondFacet(IERC8109Minimal.facetAddress.selector, facetAddressImpl);
         Bootstrap(proxy).configure(IERC8109Minimal.facetAddress.selector, facetAddressImpl);
+
         assertEq(IERC8109Minimal(proxy).facetAddress(IERC8109Minimal.facetAddress.selector), facetAddressImpl);
         assertEq(IERC8109Minimal(proxy).facetAddress(Bootstrap.configure.selector), bootstrap);
     }

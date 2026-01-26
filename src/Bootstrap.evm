@@ -1,7 +1,7 @@
 // configure(bytes4 selector, address delegate)
 
 // require(msg.sender == owner)
-JUMPI(authorized, EQ(CALLER, 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee))
+JUMPI(authorized, EQ(CALLER, 0x0000000000000000000000000000000000000000))
 
 MSTORE(0, 0x8e4a23d6) // Unauthorized(address)
 MSTORE(MSIZE, CALLER)
@@ -9,8 +9,13 @@ REVERT(28, PC)
 
 authorized:
 
+CALLDATALOAD(36) // delegate
+CALLDATALOAD(4) // selector
 // selectorToFacet[selector] = delegate
-MSTORE(32, CALLDATALOAD(4))
-SSTORE(SHA3(0, MSIZE), CALLDATALOAD(36))
+MSTORE(32, DUP1)
+SSTORE(SHA3(0, MSIZE), DUP2)
+
+0xd005a360a7720fc4ba82d2f6e99e04c4d87d95760a33d3b65b563b48069ed4de // SetDiamondFacet
+0 0 LOG3
 
 STOP
