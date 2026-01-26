@@ -12,8 +12,8 @@ authorized:
 CALLDATALOAD(36) // delegate
 CALLDATALOAD(4) // selector
 // selectorToFacet[selector] = delegate
-MSTORE(32, DUP1)
-SSTORE(SHA3(0, MSIZE), DUP2)
+MSTORE(0, DUP1)
+SSTORE(SHA3(0, 64), DUP2)
 
 0xd005a360a7720fc4ba82d2f6e99e04c4d87d95760a33d3b65b563b48069ed4de // SetDiamondFacet
 0 0 LOG3

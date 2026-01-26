@@ -9,8 +9,8 @@ contract ProxyTest is Test {
 
     bytes4 private constant SELECTOR = 0x12345678;
 
-    address proxy;
-    address bootstrap;
+    address internal proxy;
+    address internal bootstrap;
 
     function setUp() public {
         proxy = deployCode("out/Proxy.constructor.evm/Proxy.json");

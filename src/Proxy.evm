@@ -1,8 +1,8 @@
 // prepare delegatecall
 0 0 CALLDATASIZE 0
 
-MSTORE(4, SHR(224, CALLDATALOAD(0)))
-SLOAD(SHA3(0, MSIZE)) // selectorToFacet[msg.sig]
+CALLDATACOPY(0, 0, 4)
+SLOAD(SHA3(0, 64)) // selectorToFacet[msg.sig]
 
 JUMPI(delegate, DUP1)
 
