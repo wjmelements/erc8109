@@ -16,7 +16,7 @@ contract ProxyStorageBaseTest is Test {
     address internal proxy;
 
     function setUp() public {
-        proxy = deployCode("out/Proxy.constructor.evm/Proxy.json");
+        proxy = deployCode("out/Proxy.constructor.evm/Proxy.constructor.json");
     }
 
     function testStorage() public {

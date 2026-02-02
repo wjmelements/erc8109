@@ -11,7 +11,7 @@ contract ProxyTest is Test {
     address internal bootstrap;
 
     function setUp() public {
-        proxy = deployCode("out/Proxy.constructor.evm/Proxy.json");
+        proxy = deployCode("out/Proxy.constructor.evm/Proxy.constructor.json");
         bootstrap = vm.computeCreateAddress(proxy, 1);
     }
 
@@ -33,6 +33,7 @@ contract ProxyTest is Test {
 
     function testBootstrapConfigureIntrospect() public {
         address facetAddressImpl = deployCode("out/facetAddress.evm/facetAddress.json");
+        assertEq(facetAddressImpl.code.length, 15);
 
         vm.expectEmit();
         emit IERC8109Minimal.SetDiamondFacet(IERC8109Minimal.facetAddress.selector, facetAddressImpl);
