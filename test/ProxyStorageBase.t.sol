@@ -1,10 +1,10 @@
 pragma solidity ^0.8.30;
 
-import { Test } from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
-import { ProxyStorageBase } from "../src/ProxyStorageBase.sol";
-import { Bootstrap } from "../src/interfaces/Bootstrap.sol";
-import { IERC8109Minimal } from "../src/interfaces/IERC8109Minimal.sol";
+import {ProxyStorageBase} from "../src/ProxyStorageBase.sol";
+import {Bootstrap} from "../src/interfaces/Bootstrap.sol";
+import {IERC8109Minimal} from "../src/interfaces/IERC8109Minimal.sol";
 
 contract ProxyStorageView is ProxyStorageBase {
     function facetAddress(bytes4 selector) public view returns (address delegate) {

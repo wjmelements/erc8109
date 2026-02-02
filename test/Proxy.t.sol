@@ -1,12 +1,11 @@
 pragma solidity ^0.8.30;
 
-import { Test } from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
-import { Bootstrap } from "../src/interfaces/Bootstrap.sol";
-import { IERC8109Minimal } from "../src/interfaces/IERC8109Minimal.sol";
+import {Bootstrap} from "../src/interfaces/Bootstrap.sol";
+import {IERC8109Minimal} from "../src/interfaces/IERC8109Minimal.sol";
 
 contract ProxyTest is Test {
-
     address internal proxy;
     address internal bootstrap;
 
@@ -20,7 +19,9 @@ contract ProxyTest is Test {
     }
 
     function testFunctionNotFound() public {
-        vm.expectRevert(abi.encodeWithSelector(IERC8109Minimal.FunctionNotFound.selector, IERC8109Minimal.facetAddress.selector));
+        vm.expectRevert(
+            abi.encodeWithSelector(IERC8109Minimal.FunctionNotFound.selector, IERC8109Minimal.facetAddress.selector)
+        );
         IERC8109Minimal(proxy).facetAddress(Bootstrap.configure.selector);
     }
 
