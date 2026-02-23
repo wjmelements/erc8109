@@ -7,6 +7,7 @@ CREATE(0, 2, 175)
 
 64
 CODECOPY(0, configureselector, DUP1)
+LOG3(0, 0, 0x9defed6b59bc5b30ef5e8322f8bfb4c3b1989b3a63664830020361fa6b272700, MLOAD(0), DUP2)
 0 SHA3 // delegates[0x0ee62dbe]
 SSTORE
 
