@@ -12,7 +12,7 @@
         "code": "src/Proxy.evm",
         "initcode": "src/Proxy.constructor.evm",
         "constructTest": {
-            "gasUsed": "0x22abe",
+            "gasUsed": "0x229e6",
             "logs": {
                 "0x8af6a7af30d840ba137e8f3f34d54cfb8beba6e2": [
                     {
@@ -35,7 +35,7 @@
             },
             {
                 "name": "Proxy.FunctionNotFound",
-                "gasUsed": "0x5af2",
+                "gasUsed": "0x5aef",
                 "input": "0x0d741577",
                 "output": "0x5416eb980d74157700000000000000000000000000000000000000000000000000000000",
                 "status": "0x0"

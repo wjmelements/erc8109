@@ -6,8 +6,8 @@ SLOAD(SHA3(0, 64)) // delegates[msg.sig]
 
 JUMPI(delegate, DUP1)
 
+MSTORE(32, MLOAD(0))
 MSTORE(0, 0x5416eb98) // FunctionNotFound(bytes4)
-CALLDATACOPY(32, 0, 4)
 REVERT(28, 36)
 
 delegate:
