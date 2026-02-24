@@ -71,15 +71,13 @@ contract ProxyStorageView is IERC8167, ProxyStorageBase {
     }
 }
 
-error DelegateCallFailed(address);
-
 contract Proxy is ProxyStorageBase {
     constructor() {
         address installDelegate = address(new Setup(msg.sender));
         (bool success,) = installDelegate.delegatecall(
             abi.encodeWithSelector(Setup.install.selector, Setup.install.selector, installDelegate)
         );
-        require(success, DelegateCallFailed(installDelegate));
+        require(success);
     }
 
     fallback() external payable {
