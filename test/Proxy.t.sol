@@ -24,7 +24,7 @@ contract ProxyTest is Test {
         address expectedSetupImpl = vm.computeCreateAddress(expectedProxy, 1);
 
         vm.expectEmit(expectedProxy);
-        emit IERC8167.DelegateSet(Setup.install.selector, expectedSetupImpl);
+        emit IERC8167.SelectorDelegated(Setup.install.selector, expectedSetupImpl);
 
         address actualProxy = deployProxy();
 
@@ -47,7 +47,7 @@ contract ProxyTest is Test {
         address viewImpl = address(new ProxyStorageView());
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(IERC8167.implementation.selector, viewImpl);
+        emit IERC8167.SelectorDelegated(IERC8167.implementation.selector, viewImpl);
         FullAdmin(proxy).install(IERC8167.implementation.selector, viewImpl);
 
         assertEq(IERC8167(proxy).implementation(IERC8167.implementation.selector), viewImpl);
@@ -56,22 +56,22 @@ contract ProxyTest is Test {
         address fullAdminImpl = address(new FullAdmin(address(this)));
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(FullAdmin.uninstall.selector, fullAdminImpl);
+        emit IERC8167.SelectorDelegated(FullAdmin.uninstall.selector, fullAdminImpl);
         FullAdmin(proxy).install(FullAdmin.uninstall.selector, fullAdminImpl);
         assertEq(IERC8167(proxy).implementation(FullAdmin.uninstall.selector), fullAdminImpl);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(FullAdmin.upgrade.selector, fullAdminImpl);
+        emit IERC8167.SelectorDelegated(FullAdmin.upgrade.selector, fullAdminImpl);
         FullAdmin(proxy).install(FullAdmin.upgrade.selector, fullAdminImpl);
         assertEq(IERC8167(proxy).implementation(FullAdmin.upgrade.selector), fullAdminImpl);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(Setup.install.selector, fullAdminImpl);
+        emit IERC8167.SelectorDelegated(Setup.install.selector, fullAdminImpl);
         FullAdmin(proxy).upgrade(Setup.install.selector, fullAdminImpl);
         assertEq(IERC8167(proxy).implementation(Setup.install.selector), fullAdminImpl);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(IERC8167.selectors.selector, viewImpl);
+        emit IERC8167.SelectorDelegated(IERC8167.selectors.selector, viewImpl);
         FullAdmin(proxy).install(IERC8167.selectors.selector, viewImpl);
 
         bytes4[] memory selectors = IERC8167(proxy).selectors();
@@ -89,7 +89,7 @@ contract ProxyTest is Test {
         FullAdmin(proxy).upgrade(IERC8167.implementation.selector, address(0));
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(FullAdmin.upgrade.selector, address(0));
+        emit IERC8167.SelectorDelegated(FullAdmin.upgrade.selector, address(0));
         FullAdmin(proxy).uninstall(FullAdmin.upgrade.selector);
         assertEq(IERC8167(proxy).implementation(FullAdmin.upgrade.selector), address(0));
         selectors = IERC8167(proxy).selectors();
@@ -103,7 +103,7 @@ contract ProxyTest is Test {
         FullAdmin(proxy).uninstall(FullAdmin.upgrade.selector);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(FullAdmin.upgrade.selector, fullAdminImpl);
+        emit IERC8167.SelectorDelegated(FullAdmin.upgrade.selector, fullAdminImpl);
         FullAdmin(proxy).install(FullAdmin.upgrade.selector, fullAdminImpl);
         assertEq(IERC8167(proxy).implementation(FullAdmin.upgrade.selector), fullAdminImpl);
         selectors = IERC8167(proxy).selectors();
@@ -115,7 +115,7 @@ contract ProxyTest is Test {
         assertEq(selectors[4], FullAdmin.upgrade.selector);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(Setup.install.selector, address(0));
+        emit IERC8167.SelectorDelegated(Setup.install.selector, address(0));
         FullAdmin(proxy).uninstall(Setup.install.selector);
         assertEq(IERC8167(proxy).implementation(Setup.install.selector), address(0));
         selectors = IERC8167(proxy).selectors();
@@ -126,7 +126,7 @@ contract ProxyTest is Test {
         assertEq(selectors[3], IERC8167.selectors.selector);
 
         vm.expectEmit(proxy);
-        emit IERC8167.DelegateSet(IERC8167.selectors.selector, address(0));
+        emit IERC8167.SelectorDelegated(IERC8167.selectors.selector, address(0));
         FullAdmin(proxy).uninstall(IERC8167.selectors.selector);
         assertEq(IERC8167(proxy).implementation(IERC8167.selectors.selector), address(0));
 
