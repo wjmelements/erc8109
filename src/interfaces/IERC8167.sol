@@ -1,11 +1,21 @@
 pragma solidity ^0.8.30;
 
 interface IERC8167 {
-    error FunctionNotFound(bytes4 selector);
+    // RECOMMENDED
+    // Emitted when assigning a delegate logic module to a selector
+    // An address(0) delegate signals removal
+    event SelectorDelegated(bytes4 indexed selector, address indexed delegate);
 
-    event SetDelegate(bytes4 indexed selector, address indexed delegate);
-
+    // REQUIRED
+    // Returns the delegate for the selector, using address(0) for function not found
     function implementation(bytes4 selector) external view returns (address);
 
+    // REQUIRED
+    // Surfaces the ABI
+    // SHOULD return all function selectors with implementations
     function selectors() external view returns (bytes4[] memory);
+
+    // RECOMMENDED
+    // If the delegate for that selector is not set, the proxy SHOULD revert, and with FunctionNotFound.
+    error FunctionNotFound(bytes4 selector);
 }

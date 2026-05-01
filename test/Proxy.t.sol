@@ -27,7 +27,7 @@ contract ProxyTest is Test {
         address expectedBootstrapImpl = vm.computeCreateAddress(expectedProxy, 1);
 
         vm.expectEmit(expectedProxy);
-        emit IERC8167.SetDelegate(Bootstrap.configure.selector, expectedBootstrapImpl);
+        emit IERC8167.SelectorDelegated(Bootstrap.configure.selector, expectedBootstrapImpl);
 
         address actualProxy = deployProxy();
 
@@ -51,14 +51,14 @@ contract ProxyTest is Test {
         assertEq(implementationImpl.code.length, 15);
 
         vm.expectEmit(proxy);
-        emit IERC8167.SetDelegate(IERC8167.implementation.selector, implementationImpl);
+        emit IERC8167.SelectorDelegated(IERC8167.implementation.selector, implementationImpl);
         Bootstrap(proxy).configure(IERC8167.implementation.selector, implementationImpl);
 
         assertEq(IERC8167(proxy).implementation(IERC8167.implementation.selector), implementationImpl);
         assertEq(IERC8167(proxy).implementation(Bootstrap.configure.selector), bootstrapImpl);
 
         vm.expectEmit(proxy);
-        emit IERC8167.SetDelegate(Bootstrap.configure.selector, address(0));
+        emit IERC8167.SelectorDelegated(Bootstrap.configure.selector, address(0));
         Bootstrap(proxy).configure(Bootstrap.configure.selector, address(0));
 
         assertEq(IERC8167(proxy).implementation(Bootstrap.configure.selector), address(0));

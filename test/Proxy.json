@@ -12,12 +12,12 @@
         "code": "src/Proxy.evm",
         "initcode": "src/Proxy.constructor.evm",
         "constructTest": {
-            "gasUsed": "0x229e6",
+            "gasUsed": "0x229f2",
             "logs": {
                 "0x8af6a7af30d840ba137e8f3f34d54cfb8beba6e2": [
                     {
                         "topics": [
-                            "0x9defed6b59bc5b30ef5e8322f8bfb4c3b1989b3a63664830020361fa6b272700",
+                            "0x7c86091fe23e473af4b780c37525ce8cfa74ec05a4a4e7d4d3e7f0551d86a7ce",
                             "0x0ee62dbe00000000000000000000000000000000000000000000000000000000",
                             "0x00000000000000000000000076566b860970d0dab6cdb9e3f95bb32409d9f739"
                         ]
@@ -50,7 +50,7 @@
                     "0x8af6a7af30d840ba137e8f3f34d54cfb8beba6e2": [
                         {
                             "topics": [
-                                "0x9defed6b59bc5b30ef5e8322f8bfb4c3b1989b3a63664830020361fa6b272700",
+                                "0x7c86091fe23e473af4b780c37525ce8cfa74ec05a4a4e7d4d3e7f0551d86a7ce",
                                 "0x0d74157700000000000000000000000000000000000000000000000000000000",
                                 "0x000000000000000000000000e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1"
                             ]
